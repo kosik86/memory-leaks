@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<button id="button1">Stop & remove iframes from DOM</button>
+
+<script>
+
+    function createIframe() {
+
+        const iframe = document.createElement("iframe");
+        iframe.src = "iframes/whitespace.html";
+        iframe.width = 1;
+        iframe.height = 1;
+
+        document.body.appendChild(iframe);
+
+    }
+
+
+    window.addEventListener("load", () => {
+
+        interval = setInterval(() => {
+            createIframe();
+        }, 2000);
+
+
+    });
+
+    document.getElementById("button1").addEventListener("click", () => {
+
+        clearInterval(interval);
+
+        const elements = document.getElementsByTagName("iframe");
+
+        for(let i = elements.length; i > 0; i--) {
+
+            elements[i-1].remove();
+
+        }
+
+    });
+
+
+    function intervalHandler(id, event) {
+
+        console.log("Interval handler for: " + id);
+
+    }
+
+
+</script>
+
+
+
+</body>
+</html>
